@@ -22,9 +22,14 @@ function Test-ScriptSyntax {
     Write-Host "Testing syntax: $ScriptPath" -ForegroundColor Yellow
     
     try {
+        $content = Get-Content $ScriptPath -Raw
         $errors = $null
-        $null = [System.Management.Automation.PSParser]::Tokenize(
-            (Get-Content $ScriptPath -Raw), 
+        $tokens = $null
+        
+        # Use AST parsing for better syntax validation
+        $ast = [System.Management.Automation.Language.Parser]::ParseInput(
+            $content,
+            [ref]$tokens,
             [ref]$errors
         )
         
@@ -103,10 +108,27 @@ function Test-FunctionExists {
     
     try {
         $content = Get-Content $ScriptPath -Raw
+        $errors = $null
+        $tokens = $null
+        
+        # Use AST parsing for accurate function detection
+        $ast = [System.Management.Automation.Language.Parser]::ParseInput(
+            $content,
+            [ref]$tokens,
+            [ref]$errors
+        )
+        
+        # Get all function definitions from the AST
+        $functions = $ast.FindAll({
+            param($node)
+            $node -is [System.Management.Automation.Language.FunctionDefinitionAst]
+        }, $true)
+        
+        $foundFunctions = $functions | ForEach-Object { $_.Name }
         $allFound = $true
         
         foreach ($funcName in $FunctionNames) {
-            if ($content -match "function\s+$funcName\s*\{") {
+            if ($foundFunctions -contains $funcName) {
                 Write-Host "  ✓ Function found: $funcName" -ForegroundColor Green
             } else {
                 Write-Host "  ✗ Function not found: $funcName" -ForegroundColor Red

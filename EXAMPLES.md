@@ -227,9 +227,11 @@ Based on typical database sizes:
 |---------------|-------------|-------|-----------------|
 | Standard      | 100-150 MB  | 400-500 | 30-60 seconds |
 | Advanced      | 200-300 MB  | 800-1000 | 60-90 seconds |
-| Custom        | Varies      | Varies | Varies |
+| Custom**      | Varies      | Varies | Varies |
 
 *Time estimates based on local network with 1 Gbps connection
+
+**Custom configuration refers to user-defined paths and may install the predefined 'Custom' database type from Z:\JBH-Database\Custom or completely custom source/destination paths as specified by the user
 
 ## Notes for Developers
 

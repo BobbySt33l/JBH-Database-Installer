@@ -1,0 +1,38 @@
+{
+  "installer": {
+    "version": "1.0.0",
+    "name": "JBH Database Installer for Autodesk"
+  },
+  "paths": {
+    "defaultSource": "Z:\\JBH-Database",
+    "defaultDestination": "C:\\ProgramData\\JBH\\Database"
+  },
+  "configurations": {
+    "Standard": {
+      "subPath": "Standard",
+      "description": "Standard database with default settings",
+      "recommended": true
+    },
+    "Advanced": {
+      "subPath": "Advanced",
+      "description": "Advanced database with extended features",
+      "recommended": false
+    },
+    "Custom": {
+      "subPath": "Custom",
+      "description": "Custom database configuration",
+      "recommended": false
+    }
+  },
+  "options": {
+    "createBackup": true,
+    "verifyAfterCopy": true,
+    "requireAdminRights": false,
+    "showProgressBar": true
+  },
+  "logging": {
+    "enabled": true,
+    "logPath": "%TEMP%\\JBH-Installer-Logs",
+    "retainDays": 30
+  }
+}

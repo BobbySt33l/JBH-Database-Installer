@@ -1,0 +1,29 @@
+# Log files
+*.log
+logs/
+**/JBH-Installer-Logs/
+
+# Backup directories
+*-Backup-*/
+
+# Windows system files
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# PowerShell temporary files
+*.ps1.bak
+
+# Test directories
+test-data/
+temp/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Mac files
+.DS_Store
